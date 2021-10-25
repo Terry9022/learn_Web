@@ -1,0 +1,38 @@
+body{
+	margin: 0px;
+}
+
+nav{
+	display: flex;
+}
+
+nav>.logo{
+	/* 沒有彈性 固定尺寸*/
+	background-color: #ffcccc;
+	flex: none;width: 100px;
+}
+
+nav>.menu{
+	/* 盡量把容器的空間張滿*/
+	background-color: #ccffff;
+	flex: auto;
+}
+
+nav>.user{
+	background-color: #ccffcc;
+	flex: none;
+	width: 100px;
+}
+
+main{ /*容器*/
+	background-color: #cccccc;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+main>.item{  /*項目*/
+	background-color: #ffcccc;
+	flex: none;
+	width: 300px;margin: 10px;
+}

@@ -1,0 +1,62 @@
+body{
+	background-image:url(pattern.jpeg);  
+	background-repeat:repeat;
+	background-size:50px;
+}
+
+#container{
+	background-color: darkblue;
+	padding: 2%;
+	margin: auto;
+	with: 80%;
+}
+
+#header{
+	background-color: darkcyan;
+	padding: 2%;
+	text-align: center;
+}
+
+#main{
+	background-color: white;
+	height: 400px;
+}
+
+#footer{
+	background-color: darkcyan;
+	padding: 2%;
+	text-align: center;
+
+}
+
+#sidebar{
+	background-color:darkcyan ;
+	width: 30%;
+	height: 400px;
+	float: left;
+	text-align: center;
+}
+
+#article{
+	background-color: white;
+	width: 70%;
+	height: 400px;
+	float: left;
+	text-align: center;
+}
+
+@media only screen and (max-width: 575px) { 
+	#main {width:100%;float:none; margin: auto; height:90%;}
+	#sidebar {width:100%;float:none; margin: auto; height:30%;}
+	#article {width:100%;float:none; margin: auto; height:70%;}
+}
+
+
+
+
+
+
+
+
+
+

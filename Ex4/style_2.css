@@ -1,0 +1,25 @@
+#title{ 
+	background-color:blue;
+	width:100%;
+	margin:auto;
+	text-align:center;
+	padding:2%;
+} 
+
+#container1{
+	background-color:red;
+	width:100%;
+	margin:auto;
+	text-align:center;
+	margin-top:10px;
+	height: 400px;
+}
+
+#container2{
+	background-color:blue;
+	width:80%;
+	margin:auto;
+	text-align:center;
+	margin-top:80px;
+	height: 200px;
+}

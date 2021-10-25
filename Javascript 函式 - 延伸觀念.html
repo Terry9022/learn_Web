@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+<script type="text/javascript">
+// 函式的變形，函式是一種資料
+/*
+function add(n1,n2){
+	alert(n1+n2);
+}
+*/
+var x = 3;
+var add = function(n1,n2){
+	alert(n1+n2);
+};
+add(31,15);
+var test = add;
+test(10,20);
+
+
+// 函式創造新的名稱空間
+var x =3  // 全域空間，全域變數
+function test(){
+	var y =5;
+	var x = 9; // 區域空間，區域變數
+	alert(x+y);
+}
+
+test();
+
+</script>
+</head>
+<body>
+	
+</body>
+</html>
