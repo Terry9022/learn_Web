@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JavaScript AJAX 教學 - JS 與伺服器的互動</title>
+<script type="text/javascript">
+function getData(pageName){
+	// XMLHttpRequest()物件專門用來和伺服器做連線
+	var req = new XMLHttpRequest();
+	req.open("get","http://127.0.0.1:8887/"+pageName);
+	req.onload = function(){
+		// load事件，偵測連線的狀態結束
+		// 連線完成，做連線後的處理
+		var content = document.getElementById("content");
+		content.innerHTML = this.responseText;
+	};
+	req.send(); //送出連線
+
+}
+
+
+</script>
+</head>
+<body onload="getData('popular.html');">
+	<div>
+		<span onclick="getData('popular.html');">熱門</span>
+		<span onclick="getData('latest.html');">最新</span>
+	</div>
+	<div id="content"></div>
+</body>
+</html>
