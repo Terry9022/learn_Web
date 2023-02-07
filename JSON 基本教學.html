@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+<script type="text/javascript">
+//JSON: JavaScript Object Notation(JavaScript 物件表示法)
+/*
+var point = new Objrct();
+point.x = 3;
+point.y = 4;
+point.get=function(){
+	alert(this.x+","+this.y);
+};
+*/
+var point ={
+	"x":3,
+	"y":4,
+	"get":function(){
+	alert(this.x+","+this.y);
+	}
+};
+point.get();
+var jsonStr = JSON.stringify(point);
+console.log(jsonStr);
+var plainObj = JSON.parse(jsonStr);
+console.log(plainObj);
+alert(plainObj.x);
+/*
+物件結構與json格式字串轉換，使用內建json物件中的方法。
+
+使用JSON.stringify(物件);將物件轉換成json格式的字串，但會忽略函式的部分
+使用JSON.parse(JSON格式字串);將字串轉換成物件結構
+*/	
+
+</script>
+</head>
+<body>
+	
+</body>
+</html>
+
+
+
+
+
+

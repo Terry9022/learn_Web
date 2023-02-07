@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<!--載入 Babel編譯器套件-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!--載入 Redux套件-->
+<script src="https://unpkg.com/redux@4.0.5/dist/redux.min.js"></script>
+<style type="text/css">
+
+</style>
+<!--包含JSX語法的JavaScript 必須使用 type="text/babel" -->
+<script type="text/babel">
+
+// 設計組件類別
+class MyHead extends React.Component{
+    constructor(props){
+        super(props);
+    }
+    render(){
+        return <li>Hello World {this.props.level}</li>;
+    }
+}
+class MyHeadList extends React.Component{
+    constructor(props){
+        super(props);
+        this.state= store.getState();
+    }
+    
+    render(){
+        let cells=[];
+        for(let i=0;i<this.state.max;i++){
+            cells.push(<MyHead level={i}/>);
+        }
+
+        return <ul onClick={this.update.bind(this)}>{cells}</ul>;
+    }
+
+    update(){
+        // 命令 Redux 更新狀態
+        store.dispatch({
+            type:"ChangeMax",
+            max:5
+        });
+    }
+    // 以下程式是用來連接 React 和 Redux
+    refresh(){
+        // 串接Redux 的狀態改變，並且觸發 React 組件的更新
+        this.setState(store.getState());
+
+    }
+    componentDidMount(){
+        // 當 Redux 的狀態有所變化的時候，會通知／呼叫refresh 方法
+        store.subscribe(this.refresh.bind(this));
+
+    }
+    componentWillUnmount(){
+        // 清除連接點
+        this.unsubscribe();
+    }
+}
+// Redux
+let store;
+let reducer=function(state,action){
+    // 根據action 的 type 來執行更新的動作
+    switch (action.type){
+        case "ChangeMax":
+            return {max:action.max};
+        default:
+            return state;
+    }
+};
+
+window.addEventListener("load",()=>{
+    // 初始化 Redux 的儲存空間
+    store = Redux.createStore(reducer,{max:3});
+    // 初始化 React 的畫面
+
+    // 1.建立自訂的React 組件實體, 給定屬性
+    let myComponent = <MyHeadList/>; 
+    // 2.將建立好的 React 組件實體 畫到容器中
+    ReactDOM.render(myComponent, document.body);
+
+});
+</script>
+
+</head>
+<body>
+    
+</body>
+</html>

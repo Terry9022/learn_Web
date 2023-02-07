@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JavaScript 自動排程</title>
+<script type="text/javascript">
+function init(){
+	timer=document.getElementById("timer");
+	window.setTimeout(countdown,1000);
+	//window.setInterval(countdown,1000);
+}
+function countdown(){
+	timer.innerHTML=timer.innerHTML-1;
+	if(timer.innerHTML>0){
+		window.setTimeout(countdown,1000);
+	}else{
+		document.location="http://www.yahoo.com.tw/";
+	}
+	
+}
+</script>
+</head>
+<body onload="init()">
+	<span id="timer">3</span>
+	
+</body>
+</html>

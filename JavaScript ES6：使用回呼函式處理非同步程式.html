@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<script type="text/javascript">
+
+function getData(callback){
+    // 2.準備做 Ajax連線
+    let req = new XMLHttpRequest();
+    req.open("get", "data.txt");
+    req.onload=function(){
+        //  5.  等待一段時間後，『子程式』完成連線，觸發『主程式』的 load 事件，取得資料
+        //  6.  呼叫callback，即透過參數傳入的 showData 函式
+        callback(this.responseText);
+    };
+    req.send();  // 3.送出連線，建立『子程式』進行非同步處理
+    //  4. 『主程式』立刻結束函式，回傳 undefined
+}
+function showData(result){
+    alert(result);  // 7.可以從result，取得連線後得到的資料
+};
+getData(showData);  // 1.呼叫取資料用的函式，並將showData 函式透過參數傳入
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

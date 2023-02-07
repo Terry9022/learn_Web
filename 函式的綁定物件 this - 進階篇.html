@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       //this 代表函式的 綁定物件，通常在函式中使用
+       //不同的程式碼脈絡下，綁定物件代表不同的東西
+
+      // 進階：自訂的綁定物件
+      // 使用bind重新綁定物件
+      function test(){
+          console.log("綁定物件",this);
+      }
+      test();
+      let test2 = test.bind({x:3});
+      test2();
+      let test3 = test.bind(document);
+      test3();
+      // 使用apply呼叫函式，可自己設定綁定物件
+      function add(n1,n2){
+          console.log("結果",n1+n2);
+          console.log("綁定物件",this);
+      }
+      add(3,4); // 基本的函式呼叫，無法自己設定綁定物件
+      add.apply({y:4},[4,5]);
+      add.apply(document,[5,6]);
+      // 使用call 呼叫函式，可自己設定綁定物件
+      add.call({z:10},10,4);
+   </script> 
+</body>
+</html>

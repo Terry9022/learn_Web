@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Game</title>
+	<style type="text/css">
+		.board{
+			width:300px;height:300px;margin:50px auto;
+			border:5px solid #000000;border-radius:10px;
+			position:relative;
+		}
+		.board>.cell{
+			box-sizing:border-box;
+			width:100px;height:100px;line-height:100px;font-size:50px;
+			text-align:center;border:1px solid #000000;cursor:pointer;
+			display:inline-block;vertical-align:middle;
+			transition:background-color 0.5s;
+		}
+		.board>.cell:hover{
+			background-color:#e0e0e0;
+		}
+		.board>.line{
+			position:absolute;top:0px;left:0px;
+			width:300px;height:300px;
+		}
+		.hide{display:none;}
+	</style>
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<script type="text/babel">
+		class Line extends React.Component{
+			render(){
+				let startX=this.props.startIndex%3;
+				let startY=Math.floor(this.props.startIndex/3);
+				let endX=this.props.endIndex%3;
+				let endY=Math.floor(this.props.endIndex/3);
+				return <svg className="line"><line x1={startX*100+50} y1={startY*100+50} x2={endX*100+50} y2={endY*100+50} stroke="red" strokeWidth="5" /></svg>;
+			}
+		}
+		class Cell extends React.Component{
+			constructor(props){
+				super(props);
+			}
+			render(){
+				let mark="";
+				if(this.props.mark===0){
+					mark="O";
+				}else if(this.props.mark===1){
+					mark="X";
+				}
+				return <div className="cell" onClick={this.click.bind(this)}>{mark}</div>;
+			}
+			click(e){
+				this.props.updateMark(this.props.index);
+			}
+		}
+		class Board extends React.Component{
+			constructor(props){
+				super(props);
+				this.state={
+					circle:0,
+					marks:[-1, -1, -1, -1, -1, -1, -1, -1, -1],
+					winner:null
+				};
+			}
+			componentWillReceiveProps(nextProps){
+				if(this.props.count<nextProps.count){
+					this.setState({
+						circle:0,
+						marks:[-1, -1, -1, -1, -1, -1, -1, -1, -1],
+						winner:null
+					});
+				}else if(nextProps.data!==null){
+					this.setState(nextProps.data);
+				}
+			}
+			componentDidUpdate(){
+				this.props.saveData(this.state);
+			}
+			render(){
+				let cells=[];
+				for(let i=0;i<this.state.marks.length;i++){
+					cells.push(<Cell index={i} mark={this.state.marks[i]} updateMark={this.updateMark.bind(this)} />)
+				}
+				if(this.state.winner===null){
+					return <div className="board">{cells}</div>;
+				}else{
+					return <div className="board">{cells}
+						<Line startIndex={this.state.winner.startIndex} endIndex={this.state.winner.endIndex} />
+					</div>;
+				}
+			}
+			updateMark(index){
+				let mark=this.state.marks[index];
+				if(mark===-1){
+					this.setState((preState)=>{
+						preState.marks[index]=preState.circle%2;
+						preState.circle++;
+						return {
+							circle:preState.circle,
+							marks:preState.marks,
+							winner:this.checkWinner(preState.marks)
+						};
+					});
+				}
+			}
+			checkWinner(marks){
+				// check horizontal
+				let index;
+				for(let y=0;y<3;y++){
+					if(marks[y*3]!==-1&&marks[y*3]===marks[y*3+1]&&marks[y*3+1]===marks[y*3+2]){
+						return {side:marks[y*3], startIndex:y*3, endIndex:y*3+2};
+					}
+				}
+				// check vertical
+				for(let x=0;x<3;x++){
+					if(marks[x]!==-1&&marks[x]===marks[3+x]&&marks[3+x]===marks[2*3+x]){
+						return {side:marks[x], startIndex:x, endIndex:2*3+x};
+					}
+				}
+				// check cross
+				if(marks[0]!==-1&&marks[0]===marks[4]&&marks[4]===marks[8]){
+					return {side:marks[0], startIndex:0, endIndex:8};
+				}else if(marks[2]!==-1&&marks[2]===marks[4]&&marks[4]===marks[6]){
+					return {side:marks[2], startIndex:2, endIndex:6};
+				}
+				return null;
+			}
+		}
+		class Menu extends React.Component{
+			render(){
+				return <div>
+					<button onClick={this.props.restart}>Restart</button>
+					<button onClick={this.props.load}>Load</button>
+				</div>;
+			}
+		}
+		class Game extends React.Component{
+			constructor(props){
+				super(props);
+				this.state={count:1, data:null};
+			}
+			render(){
+				return <div>
+					<Board count={this.state.count} data={this.state.data} saveData={this.save.bind(this)} />
+					<Menu restart={this.restart.bind(this)} load={this.load.bind(this)} />
+				</div>
+			}
+			restart(){
+				this.setState((preState)=>({count:preState.count+1}));
+			}
+			save(data){
+				window.localStorage.setItem("data", JSON.stringify(data));
+			}
+			load(){
+				let data=JSON.parse(window.localStorage.getItem("data"));
+				this.setState({data:data});
+			}
+		}
+		window.addEventListener("load", ()=>{
+			ReactDOM.render(<Game/>, document.body);
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

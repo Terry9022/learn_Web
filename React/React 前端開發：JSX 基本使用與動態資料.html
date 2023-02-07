@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<!--載入 Babel編譯器套件-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!--包含JSX語法的JavaScript 必須使用 type="text/babel" -->
+<script type="text/babel">
+
+// 設計組件類別
+class MyHead extends React.Component{
+    render(){
+        //return React.createElement("div", {classname:"head"}, "Hello World"+this.props.level);
+        return <div className="head">Hello World {this.props.level}</div>;
+    }
+}
+class MyHeadList extends React.Component{
+    render(){
+        return <div>
+                <MyHead level="1"/>
+                <MyHead level="2"/>
+                <MyHead level="3"/>
+               </div>;
+    }
+}
+window.addEventListener("load",()=>{
+    // 1.建立自訂的React 組件實體, 給定屬性
+    let myComponent = <MyHeadList/>; //React.createElement(MyHead, {level:2});
+    // 2.將建立好的 React 組件實體 畫到容器中
+    ReactDOM.render(myComponent, document.body);
+
+});
+</script>
+
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<!--載入 Babel編譯器套件-->
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<style type="text/css">
+
+</style>
+<!--包含JSX語法的JavaScript 必須使用 type="text/babel" -->
+<script type="text/babel">
+
+// 設計組件類別
+class MyForm extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            name:"",
+            gender:"male",
+            story:""
+        };
+    }
+    render(){
+        return <form onSubmit={this.handleSubmit.bind(this)}>
+            Name<input type="text" value={this.state.name}
+            onChange={this.handleNameChange.bind(this)}/>
+            <br/>
+            Gender<select value={this.state.gender}
+            onChange={this.handleGenderChange.bind(this)}>
+                <option value="male">男</option><option value="female">女</option>
+                </select>
+            <br/>
+            Story<textarea value={this.state.story}
+            onChange={this.handleStoryChange.bind(this)}/>
+            <br/>
+            <input type="submit" value="Submit"/>
+            </form>;
+    }
+    handleStoryChange(e){
+        this.setState({story:e.currentTarget.value});
+    }
+    handleGenderChange(e){
+        this.setState({gender:e.currentTarget.value});
+    }
+    handleNameChange(e){
+        this.setState({name:e.currentTarget.value});
+    }
+    handleSubmit(e){
+        e.preventDefault();
+        console.log("表單送出");
+        console.log("Name "+this.state.name);
+        console.log("Gender "+this.state.gender);
+        console.log("Story "+this.state.story);
+        // 根據使用者輸入的資料，進行任何想要的運算、邏輯
+    }
+
+}
+
+window.addEventListener("load",()=>{
+    ReactDOM.render(<MyForm/>, document.body);
+
+});
+</script>
+
+</head>
+<body>
+    
+</body>
+</html>

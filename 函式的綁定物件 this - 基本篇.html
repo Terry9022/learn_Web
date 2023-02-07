@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       //this 代表函式的 綁定物件，通常在函式中使用
+       //不同的程式碼脈絡下，綁定物件代表不同的東西
+
+      //情況一：獨立的函式
+      function test(){
+          console.log(this); //this就是window物件
+          console.log(this.innerWidth); //印出視窗的寬度
+      }
+      test();
+      //情況二：物件的方法
+      let obj={
+          x:3,
+          test:function(){
+              console.log(this); // this就是方法所屬的物件本身
+              console.log(this.x) // 印出物件的屬性x
+          }
+      };
+      obj.test();
+      //情況三：事件處理函式
+      document.addEventListener("click",function(){
+          console.log(this); // this就是觸發事件的對象物件
+          this.body.innerHTML="Clicked";
+      });
+      //情況四：建構函式
+      function Point(){
+          console.log(this); // this 就是瀏覽器自動幫我們新建立好的空白物件
+          this.x = 3;
+          this.y = 4;
+      }
+      let p1 = new Point();
+      console.log(p1);
+   </script> 
+</body>
+</html>

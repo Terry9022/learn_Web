@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<!--載入 Babel編譯器套件-->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/redux@4.0.5/dist/redux.min.js"></script>
+<style type="text/css">
+    .switch{
+        width:60px;height:30px;background-color: #dddddd;border-radius: 15px;
+    }
+    .switch>.btn{
+        width:30px;height:30px;background-color: #444444;border-radius: 15px;
+    }
+    .switch-on{
+        background-color: #ddffdd;
+    }
+    .switch-on>.btn{
+        background-color: #448844;margin-left: 30px;
+    }
+</style>
+<!--包含JSX語法的JavaScript 必須使用 type="text/babel" -->
+<script type="text/babel">
+class Button extends React.Component{
+    render(){
+        return <div className="btn"></div>
+    }
+}
+class Switch extends React.Component{
+    constructor(props){
+        super(props);
+        this.state=store.getState();
+    }
+
+
+    render(){
+        let className = "switch"
+        if(this.state.on){
+            className+=" switch-on";
+        }
+        return <div onClick={this.update.bind(this)} className={className}>
+            <Button/>
+            </div>;
+    }
+    update(){
+        store.dispatch({
+            type:"ChangeSwitch"
+        });
+    }
+    // 連接 Redux 的狀態更新
+    refresh(){
+        this.setState(store.getState());
+    }
+    componentDidMount(){
+        this.unsubscribe=store.subscribe(this.refresh.bind(this));
+    }
+    componentWillUnmount(){
+        this.unsubscribe();
+    }
+
+}
+let store;
+let reducer=function(state,action){
+    switch(action.type){
+        case "ChangeSwitch":
+            return {on:!state.on};
+        default:
+            return state;
+    }
+};
+window.addEventListener("load",()=>{
+    store = Redux.createStore(reducer,{on:false});
+    ReactDOM.render(<Switch/>,document.body);
+});
+</script>
+
+</head>
+<body>
+</body>
+</html>

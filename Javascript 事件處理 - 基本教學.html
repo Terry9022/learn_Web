@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+<script type="text/javascript">
+function over(element){
+	element.style.color="red";
+};
+function out(element){
+	element.style.color="black";
+};
+
+
+</script>
+</head>
+<body>
+	<button onclick="alert('Clicked');">Click</button>
+	<span onmouseover="over(this);" onmouseout="out(this);">Test</span>
+	<div onmouseover="over(this);" onmouseout="out(this);">Line 2</div>
+	
+</body>
+</html>

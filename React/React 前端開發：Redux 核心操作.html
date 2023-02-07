@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/redux@4.0.5/dist/redux.min.js"></script>
+<script>
+    let store;
+    let reducer=function(state,action){  // 目前的狀態、接受到的行動物件
+        // 無論狀態是否改變，都ㄧ定要回傳新的狀態物件，新的狀態物件會『完全取代』舊的狀態物件
+        switch(action.type){
+            case "UPDATE_SWITCH":
+                return {on:!state.on};
+            default:
+                return state;
+        }
+    };
+    let handler=function(){
+        // 一旦狀態有變化，就會被呼叫
+        let state = store.getState();
+        document.body.innerHTML=state.on?"on":"off"; // 把最新狀態顯示
+    };
+    window.addEventListener("load",()=>{
+        // 建立狀態儲存空間，必須準備好狀態處理函式 (Reducer)，以及初始的狀態物件
+        store = Redux.createStore(reducer, {on:false});
+        // 註冊回應狀態改變的函式
+        let unsubscribe = store.subscribe(handler);
+        // unsubscribe(); // 取消對應的、已註冊的狀態改變函式
+        document.addEventListener("click",()=>{
+            // 建立行動物件，並且透過dispatch 派送給狀態處理函式（Reducer)，改變狀態
+            // 行動物件：唯一的要求，一定要提供type屬性，代表行動是什麼
+            store.dispatch({
+                type:"UPDATE_SWITCH"
+            });
+        
+        });
+    });
+</script>
+</head>
+<body>
+    off
+</body>
+</html>

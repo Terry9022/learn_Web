@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Event Object 事件物件</title>
+<script type="text/javascript">
+function init(){
+	var btn = document.getElementById("btn");
+	var handler=function(e){
+		alert(e.clientX+ " ,"+e.clientY);
+	};
+	btn.addEventListener("click",handler);
+
+	document.addEventListener("keydown",function(e){
+		alert(e.keyCode);
+	})
+}
+/*
+1. 使用者點擊了按鈕，觸發了click事件。
+2. 瀏覽器主動收集和事件有關的資訊，並製造出Event Object事件物件
+var eventObj = 事件物件;
+3. 呼叫已經註冊的事件處理器（事件處理函式）
+handler(eventObj);
+*/
+
+</script>
+</head>
+<body onload="init()">
+	<button id="btn">Click</button>
+	
+</body>
+</html>

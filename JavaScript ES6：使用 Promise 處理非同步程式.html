@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+<script type="text/javascript">
+
+function getData(){
+    return new Promise(function(resolve, reject){
+        let req = new XMLHttpRequest()
+        req.open("get","data.txt");
+        req.onload=function(){
+            // 如何將連線後得到的資料 this.responseText 串接到主流程上
+            resolve(this.responseText);
+        };
+        req.onerror = function(){
+            reject("Error"); // 失敗時，做出失敗報告
+        }
+        req.send();
+    });
+}
+
+// 這是主流程
+let dataPromise = getData();  // 嘗試從網路取得資料，回傳Promise物件
+dataPromise.then(function(result){
+    console.log(result);  // 這裡可以從參數result 正確取得連線後得到的資料
+}, function(error){
+    console.log(error);  //  這裡可以從參數error，取得失敗報告
+});
+
+</script>
+</head>
+<body>
+	
+</body>
+</html>

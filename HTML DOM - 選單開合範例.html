@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+<script type="text/javascript">
+
+function toggleMenu(number){
+	var menu=document.getElementById("menu-"+number);
+	menu.classList.toggle("hide"); // 切換標籤物件class的hide設定
+
+	/*
+	if(menu.style.display=="none"){
+		menu.style.display="block";
+	}else{
+		menu.style.display="none";
+	}
+	*/
+};
+
+
+</script>
+<style type="text/css">
+	.hide{display: none;}
+</style>
+
+</head>
+<body>
+	<div onclick="toggleMenu();">選單的標題1</div>
+	<ul id="menu-1">
+		<li>項目1-1</li>
+		<li>項目1-2</li>
+		<li>項目1-3</li>
+	</ul>
+	<div onclick="toggleMenu();">選單的標題2</div>
+	<ul id="menu-2">
+		<li>項目2-1</li>
+		<li>項目2-2</li>
+		<li>項目2-3</li>
+	</ul>
+	<div onclick="toggleMenu();">選單的標題3</div>
+	<ul id="menu-3">
+		<li>項目3-1</li>
+		<li>項目3-2</li>
+	</ul>
+</body>
+</html>
