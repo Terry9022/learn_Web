@@ -1,0 +1,76 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+h1 {
+  display: inline;
+  margin: 2%;
+  margin-left: 1.6%;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #eeeeee;
+  width: 30%;
+  float: left;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+div {
+  display: inline-block;
+  position: relative;
+  width: 30%;
+  padding-top: 30%;
+  margin: 1.66%;
+  float: left;
+}
+span {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #111111;
+  z-index: 1;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+span:hover {
+  opacity: 0.7;
+}
+span:after {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  content: 'Exchange Student at UAlbany';
+  color: white;
+  text-align: center;
+  vertical-align: center;
+  width: 90%;
+  height: 90%;
+  border: 1px solid white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+img {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /*float eliminates browser default padding*/
+  float: left;
+}
+i {
+  padding: 0px 10px;
+}
+i:hover {
+  cursor: pointer;
+}
+br {
+  clear: both;
+}

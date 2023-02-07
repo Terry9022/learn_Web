@@ -1,0 +1,91 @@
+body {
+  background: whitesmoke;
+}
+.form {
+  max-width: 420px;
+  margin: 50px auto;
+}
+
+.feedback-input {
+  color: black;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 5px;
+  line-height: 22px;
+  background-color: transparent;
+  border: 2px solid #cc6666;
+  transition: all 0.3s;
+  padding: 13px;
+  margin-bottom: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+.feedback-input:focus {
+  border: 2px solid #cc4949;
+}
+
+textarea {
+  height: 150px;
+  line-height: 150%;
+  resize: vertical;
+}
+
+[type='submit'] {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  width: 100%;
+  background: #cc6666;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: all 0.3s;
+  margin-top: -4px;
+  font-weight: 700;
+}
+[type='submit']:hover {
+  background: #cc4949;
+}
+
+h1 {
+  display: inline;
+  margin-left: 1.6%;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #eeeeee;
+  width: 30%;
+  float: left;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+#home {
+  font-family: 'Raleway', sans-serif;
+  margin-top: 0;
+}
+
+#message {
+  text-align: center;
+  width: 70%;
+  margin: auto;
+  background-color: #2abca7;
+  color: white;
+  font-family: sans-serif;
+  font-size: 17pt;
+}
+
+.myImg {
+  display: none;
+  height: 5%;
+  width: 5%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}

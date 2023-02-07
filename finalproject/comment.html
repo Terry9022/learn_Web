@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        
+	<title>Personal Blog</title>
+    <link rel="stylesheet" type="text/css" href="comment.css">
+
+    <!--- Link to external java script : comment.js --->
+    <script src="comment.js"></script>
+    
+	</head>
+	<body>
+    
+    <div id=home><h1><a href="home.html">Terry Lu</a></h1></div>
+    
+    <br><br><br><br><br>
+
+    <div class="form">
+        
+        <input name="name" type="text" id="name" class="feedback-input" placeholder="Name" />   
+        <input name="email" type="text" id="email"  class="feedback-input" placeholder="Email" />
+        <textarea name="text" id="comment" class="feedback-input" placeholder="Comment"></textarea>
+        <!--- If user put the button, it will call the show function --->
+        <button type="submit" onclick="show()" id="submit">SUBMIT</button>
+        
+    </div>
+
+    <img class="myImg" src="./done.png">
+    <p id="message"></p>
+	</body>
+</html>
+
